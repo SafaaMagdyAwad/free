@@ -1,110 +1,126 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
-  <title>اختبار المكملات المخصصة</title>
+  <title>باقاتنا</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f5f5;
       margin: 0;
-      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f9f9f9;
+      background-image:
+        linear-gradient(45deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0, 0, 0, 0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.03) 75%);
+      background-size: 40px 40px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    h1 {
+      color: darkblue;
+      margin-bottom: 50px;
+    }
+p{
+  color: blue;
+  margin-bottom: 50px;
+}
+    .plans {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .plan {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-top: 50px;
+
+    .plan h2 {
+      color: blue;
+      margin-bottom: 10px;
     }
-    .question {
-      display: none;
+
+    .plan p {
+      margin-bottom: 20px;
+      color: #555;
     }
-    .question.active {
-      display: block;
+
+    .plan a {
+      background-color: blue;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s;
     }
-    button {
-      background-color: #28a745;
-      color: white;
+
+    .plan a:hover {
+      background-color: darkblue;
+    }
+    .start-btn{
+      background-color: antiquewhite;
+      color: darkblue;
       border: none;
       padding: 12px 20px;
       border-radius: 8px;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 100px;
+      text-decoration: none;
     }
-    button:hover {
-      background-color: #218838;
+    .start-btn:hover {
+      background-color: darkblue;
+      color: antiquewhite;
     }
-    .result {
-      display: none;
+    ul{
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      background-color: antiquewhite;
+      color: blue;
+      margin-top: 0px;
+      /* height: 100px; */
+      padding: 50px;
     }
-    .result h2 {
-      color: #333;
+ul li a{
+  text-decoration: none;
+}
+    @media (min-width: 768px) {
+      .plans {
+        flex-direction: row;
+        justify-content: space-between;
+      }
     }
   </style>
 </head>
+
 <body>
+  <nav>
+    <ul>
+      <li>
+        <a href="https://almkmlataldhhbyh.zid.store/">  💻 تصفح موقعنا</a> 
+      </li>
+      <li>
+        <a>  تواصل معنا  📱 </a>
+      </li>
+    </ul>
+  </nav>
   <div class="container">
-    <h1>اكتشف المكمل المناسب لك!</h1>
-    <div class="question active" id="q1">
-      <p>ما هو هدفك الأساسي؟</p>
-      <button onclick="nextQuestion('زيادة الطاقة')">⚡️ زيادة الطاقة</button>
-      <button onclick="nextQuestion('بناء العضلات')">💪 بناء العضلات</button>
-      <button onclick="nextQuestion('تعزيز المناعة')">🛡️ تعزيز المناعة</button>
-    </div>
+    <h1>مرحبًا بك في المكملات الذهبية!</h1>
+    <p>نساعدك في اختيار أفضل باقة مكملات غذائية بناءً على احتياجك الصحي والرياضي</p>
+    <a href="index1.html" class="start-btn">ابدأ الاختبار الآن</a>
 
-    <div class="question" id="q2">
-      <p>ما هو نظامك الغذائي؟</p>
-      <button onclick="nextQuestion('نباتي')">🌱 نباتي</button>
-      <button onclick="nextQuestion('كيتو')">🥩 كيتو</button>
-      <button onclick="nextQuestion('عادي')">🍽️ عادي</button>
-    </div>
-
-    <div class="question" id="q3">
-      <p>هل تعاني من أي مشاكل صحية؟</p>
-      <button onclick="showResult('لا مشاكل')">لا</button>
-      <button onclick="showResult('ضغط الدم')">نعم، ضغط الدم</button>
-      <button onclick="showResult('السكري')">نعم، السكري</button>
-    </div>
-
-    <div class="result" id="resultBox">
-      <h2>✅ المنتج المناسب لك هو:</h2>
-      <p id="resultText"></p>
-      <button onclick="alert('تمت الإضافة إلى السلة!')">🛒 أضف إلى السلة</button>
-    </div>
   </div>
-
-  <script>
-    let currentStep = 1;
-    let answers = [];
-
-    function nextQuestion(answer) {
-      answers.push(answer);
-      document.getElementById("q" + currentStep).classList.remove("active");
-      currentStep++;
-      document.getElementById("q" + currentStep).classList.add("active");
-    }
-
-    function showResult(finalAnswer) {
-      answers.push(finalAnswer);
-      document.getElementById("q" + currentStep).classList.remove("active");
-      document.getElementById("resultBox").style.display = "block";
-
-      // تحليل بسيط للتوصية
-      let result;
-      if (answers[0] === "زيادة الطاقة") {
-        result = "فيتامين B12 + مغنيسيوم";
-      } else if (answers[0] === "بناء العضلات") {
-        result = "بروتين نباتي + كرياتين";
-      } else {
-        result = "فيتامين C + زنك";
-      }
-
-      document.getElementById("resultText").innerText = `تركيبتك: ${result}`;
-    }
-  </script>
 </body>
+
 </html>

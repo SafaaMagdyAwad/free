@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>اختبار المكملات المخصصة</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #cac7c7;
+      color: darkblue;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 50px;
+    }
+    .question {
+      display: none;
+    }
+    .question.active {
+      display: block;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .result {
+      display: none;
+    }
+    .result h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>اكتشف المكمل المناسب لك!</h1>
+    <div class="question active" id="q1">
+      <p>ما هو هدفك الأساسي؟</p>
+      <button onclick="nextQuestion('زيادة الطاقة')">⚡️ زيادة الطاقة</button>
+      <button onclick="nextQuestion('بناء العضلات')">💪 بناء العضلات</button>
+      <button onclick="nextQuestion('تعزيز المناعة')">🛡️ تعزيز المناعة</button>
+    </div>
+
+    <div class="question" id="q2">
+      <p>ما هو نظامك الغذائي؟</p>
+      <button onclick="nextQuestion('نباتي')">🌱 نباتي</button>
+      <button onclick="nextQuestion('كيتو')">🥩 كيتو</button>
+      <button onclick="nextQuestion('عادي')">🍽️ عادي</button>
+    </div>
+
+    <div class="question" id="q3">
+      <p>هل تعاني من أي مشاكل صحية؟</p>
+      <button onclick="showResult('لا مشاكل')">لا</button>
+      <button onclick="showResult('ضغط الدم')">نعم، ضغط الدم</button>
+      <button onclick="showResult('السكري')">نعم، السكري</button>
+    </div>
+
+    <div class="result" id="resultBox">
+      <h2>✅ المنتج المناسب لك هو:</h2>
+      <p id="resultText"></p>
+      <button onclick="alert('تمت الإضافة إلى السلة!')">🛒 أضف إلى السلة</button>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    let answers = [];
+
+    function nextQuestion(answer) {
+      answers.push(answer);
+      document.getElementById("q" + currentStep).classList.remove("active");
+      currentStep++;
+      document.getElementById("q" + currentStep).classList.add("active");
+    }
+
+    function showResult(finalAnswer) {
+      answers.push(finalAnswer);
+      document.getElementById("q" + currentStep).classList.remove("active");
+      document.getElementById("resultBox").style.display = "block";
+
+      // تحليل بسيط للتوصية
+      let result;
+      if (answers[0] === "زيادة الطاقة") {
+        result = "فيتامين B12 + مغنيسيوم";
+      } else if (answers[0] === "بناء العضلات") {
+        result = "بروتين نباتي + كرياتين";
+      } else {
+        result = "فيتامين C + زنك";
+      }
+
+      document.getElementById("resultText").innerText = `تركيبتك: ${result}`;
+    }
+  </script>
+</body>
+</html>
